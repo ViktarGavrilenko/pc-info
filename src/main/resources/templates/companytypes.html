@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Company types</title>
+</head>
+<body>
+<form method="post" th:action="@{/type/delete}" th:object="${companyTypes}">
+    Тип предприятия:
+    <select name="id" >
+        <option th:each="companyType : ${companyTypes}"
+                th:text="${companyType.type}"
+                th:value="${companyType.id}">
+    </select><br/><br/>
+    <input type="submit" value="Удалить выбранный тип"/>
+</form><br/>
+<h4>В поле ниже добавьте новый тип предприятия</h4>
+<form method="post" th:action="@{/type/add}" th:object="${companyTypes}">
+    <label name="type">Введите название типа: </label>
+    <input type="text" name="type"/><br/><br/>
+    <input type="submit" value="Добавить компанию"/>
+</form>
+
+</body>
+</html>

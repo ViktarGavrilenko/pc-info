@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Company info</title>
+</head>
+<body>
+<h3 th:text="${company.shortName}"></h3>
+<div th:text="${company.name} + '. Тип: '+ ${company.type.getType()}"></div>
+<form method="post" th:action="@{/company/delete}">
+    <input type="text" name="id" th:value="${company.id}" hidden/>
+    <input type="submit" value="Удалить предприятие"/>
+</form>
+</body>
+</html>

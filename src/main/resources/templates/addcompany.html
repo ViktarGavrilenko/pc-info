@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add company</title>
+</head>
+<body>
+<h1>Введите данные о новом предприятии</h1>
+<form method="post" th:action="@{/company/add}" th:object="${company}">
+    <input type="text" th:field="*{id}" hidden/>
+    <label name="name-company">Название: </label>
+    <input type="text" name="name" th:field="*{name}"/><br/><br/>
+    <label name="shortname-company">Краткое название: </label>
+    <input type="text" name="shortname" th:field="*{shortName}"/><br/><br/>
+    Тип предприятия:
+    <select name="type" th:field="*{type}">
+        <option th:each="companyType : ${companyTypes}"
+                th:text="${companyType.type}"
+                th:value="${companyType.id}">
+    </select><br/><br/>
+    <input type="submit" value="Добавить компанию"/>
+</form>
+</body>
+</html>
