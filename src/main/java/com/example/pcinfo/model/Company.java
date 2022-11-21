@@ -10,6 +10,9 @@ public class Company {
     private Long id;
     private String name;
 
+    @Column(name = "digital_number")
+    private Integer digitalNumber;
+
     @Column(name = "short_name")
     private String shortName;
 
@@ -17,7 +20,26 @@ public class Company {
     @JoinColumn(name = "company_types_id")
     private CompanyTypes type;
 
+    @Column(name = "parent_id")
+    private Long parentId;
+
     public Company() {
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getDigitalNumber() {
+        return digitalNumber;
+    }
+
+    public void setDigitalNumber(Integer digitalNumber) {
+        this.digitalNumber = digitalNumber;
     }
 
     public CompanyTypes getType() {

@@ -8,11 +8,14 @@
 <h1>Введите данные о новом предприятии</h1>
 <form method="post" th:action="@{/company/add}" th:object="${company}">
     <input type="text" th:field="*{id}" hidden/>
-    <label name="name-company">Название: </label>
+    <input type="text" name="parentId" th:value="${companyParent.id}" hidden/>
+    <label name="name">Название: </label>
     <input type="text" name="name" th:field="*{name}"/><br/><br/>
-    <label name="shortname-company">Краткое название: </label>
+    <label name="shortname">Краткое название: </label>
     <input type="text" name="shortname" th:field="*{shortName}"/><br/><br/>
-    Тип предприятия:
+    <label name="digital-number">Цифровой номер: </label>
+    <input type="text" name="digital-number" th:field="*{digitalNumber}"/><br/><br/>
+    <label name="type">Тип предприятия: </label>
     <select name="type" th:field="*{type}">
         <option th:each="companyType : ${companyTypes}"
                 th:text="${companyType.type}"

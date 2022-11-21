@@ -20,10 +20,16 @@ public class CompanyController {
     CompanyTypesRepository companyTypesRepository;
 
     @GetMapping("/add")
-    public String addCompany(Model model) {
+    public String addCompany(@RequestParam(value = "parent", required = false) Long id, Model model) {
         Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
-        model.addAttribute("companyTypes", companyTypes);
+        Optional<Company> company = companyRepository.findById(id);
+        if (company.isEmpty()) {
+            model.addAttribute("companyParent", new Company());
+        } else {
+            model.addAttribute("companyParent", company.get());
+        }
         model.addAttribute("company", new Company());
+        model.addAttribute("companyTypes", companyTypes);
         return "addCompany";
     }
 
@@ -38,7 +44,7 @@ public class CompanyController {
     @GetMapping("/{id}")
     public String showCompany(Model model, @PathVariable Long id) {
         Optional<Company> company = companyRepository.findById(id);
-        if(company.isEmpty()){
+        if (company.isEmpty()) {
             return "error";
         } else {
             model.addAttribute("company", company.get());
@@ -46,7 +52,7 @@ public class CompanyController {
         }
     }
 
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public String delCompany(@RequestParam(value = "id") Long id) {
         companyRepository.deleteById(id);
         return "redirect:/";

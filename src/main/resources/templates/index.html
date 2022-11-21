@@ -11,6 +11,7 @@
         <div th:text="${company.shortName} + ' (' + ${company.name} + ') ' + ${company.type.getType()}"></div>
     </a>
 </div>
-<a th:href="@{/company/add}">Добавить новое предприятие</a>
+<br>
+<h3><a th:href="@{/company/add}">Добавить новое предприятие</a></h3>
 </body>
 </html>
