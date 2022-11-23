@@ -2,29 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add company</title>
+    <title>Update company</title>
 </head>
 <body>
-<h1>Введите данные о новом предприятии</h1>
-<form method="post" th:action="@{/company/add}" th:object="${company}">
+<h1>Измените необходимые данные</h1>
+<form method="post" th:action="@{/company/update}" th:object="${company}">
     <input type="text" th:field="*{id}" hidden/>
-    <input type="text" name="parentId" th:value="${companyParent.id}" hidden/>
+    <input type="text" th:field="*{parentId}" hidden/>
     <label name="shortname">Краткое название: </label>
     <input type="text" name="shortname" th:field="*{shortName}"/><br/><br/>
     <label name="name">Название: </label>
     <input type="text" name="name" th:field="*{name}"/><br/><br/>
     <label name="digital-number">Цифровой номер: </label>
-    <input type="text" name="digital-number" th:field="*{digitalNumber}"/>
-    <div th:if="${#fields.hasErrors('digitalNumber')}"
-          th:errors="*{digitalNumber}">Ошибка цифрового номера</div>
-    <br/><br/>
+    <input type="text" name="digital-number" th:field="*{digitalNumber}"/><br/><br/>
     <label name="type">Тип предприятия: </label>
     <select name="type" th:field="*{type}">
         <option th:each="companyType : ${companyTypes}"
                 th:text="${companyType.type}"
                 th:value="${companyType.id}">
     </select><br/><br/>
-    <input type="submit" value="Добавить компанию"/>
+    <input type="submit" value="Изменить данные"/>
+    <br/><br/>
+    <a th:href="@{/company/{id}(id=${company.id})}">Вернуться назад</a>
+
 </form>
+
 </body>
 </html>

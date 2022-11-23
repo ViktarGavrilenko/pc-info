@@ -15,7 +15,7 @@ public class DefaultController {
 
     @GetMapping("/")
     public String showIndex(Model model) {
-        Iterable<Company> companies = company.findAll();
+        Iterable<Company> companies = company.findAllByParentIdIsNull();
         model.addAttribute("companies", companies);
         return "index";
     }

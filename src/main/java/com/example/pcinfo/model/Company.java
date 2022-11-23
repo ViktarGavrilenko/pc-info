@@ -1,6 +1,9 @@
 package com.example.pcinfo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+
 
 @Entity(name = "company")
 public class Company {
@@ -11,6 +14,7 @@ public class Company {
     private String name;
 
     @Column(name = "digital_number")
+    @Digits(integer = 3, fraction = 0, message = "Неверный цифровой код")
     private Integer digitalNumber;
 
     @Column(name = "short_name")

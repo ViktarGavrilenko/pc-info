@@ -7,14 +7,23 @@
 <body>
 <h3 th:text="${company.shortName}"></h3>
 <div th:text="${company.name} + '. Тип: ' + ${company.type.getType()} + '. Цифровой код: ' + ${company.digitalNumber}"></div>
+
+<h2> Дочерние компании</h2>
+<div th:each="childrenCompany : ${childrenCompanies}">
+    <a th:href="@{/company/{id}(id=${childrenCompany.id})}">
+        <div th:text="${childrenCompany.shortName}"></div>
+    </a>
+</div>
 <br/>
+<a th:href="@{/company/add?parent={id}(id=${company.id})}">Создать отдел</a>
+<br/><br/>
+<a th:href="@{/company/{id}(id=${company.parentId})}">Вернуться назад</a>
+<br/><br/>
+<a th:href="@{/company/update/{id}(id=${company.id})}">Редактировать</a>
+<br/><br/>
 <form method="post" th:action="@{/company/delete}">
     <input type="text" name="id" th:value="${company.id}" hidden/>
-    <input type="submit" value="Удалить предприятие"/>
+    <input type="submit" value="Удалить"/>
 </form>
-<br/>
-<a th:href="@{/}">Вернуться на главную страницу</a>
-<br/><br/>
-<a th:href="@{/company/add?parent={id}(id=${company.id})}">Создать отдел</a>
 </body>
 </html>
