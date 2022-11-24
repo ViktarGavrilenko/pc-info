@@ -7,9 +7,10 @@ import com.example.pcinfo.repository.CompanyTypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -25,9 +26,9 @@ public class CompanyController {
         Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
         Optional<Company> company = companyRepository.findById(id);
         if (company.isEmpty()) {
-            model.addAttribute("companyParent", new Company());
+            model.addAttribute("companyParent", null);
         } else {
-            model.addAttribute("companyParent", company.get());
+            model.addAttribute("companyParent", company.get().getId());
         }
         model.addAttribute("company", new Company());
         model.addAttribute("companyTypes", companyTypes);
@@ -35,9 +36,13 @@ public class CompanyController {
     }
 
     @PostMapping("/add")
-    public String addCompany(@ModelAttribute Company company, Model model, BindingResult errors) {
+    public String addCompany(@ModelAttribute("company") @Valid Company company, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            return "/company/add";
+            Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
+            model.addAttribute("companyParent", company.getParentId());
+            model.addAttribute("company", company);
+            model.addAttribute("companyTypes", companyTypes);
+            return "addCompany";
         } else {
             companyRepository.save(company);
             if (company.getParentId() == null) {

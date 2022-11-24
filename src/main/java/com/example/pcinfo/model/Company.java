@@ -2,8 +2,7 @@ package com.example.pcinfo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotEmpty;
 
 @Entity(name = "company")
 public class Company {
@@ -11,13 +10,15 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Название не должно быть пустым")
     private String name;
 
     @Column(name = "digital_number")
-    @Digits(integer = 3, fraction = 0, message = "Неверный цифровой код")
+    @Digits(integer = 3, fraction = 0, message = "Введите корректный цифровой код")
     private Integer digitalNumber;
 
     @Column(name = "short_name")
+    @NotEmpty(message = "Краткое название не должно быть пустым")
     private String shortName;
 
     @OneToOne

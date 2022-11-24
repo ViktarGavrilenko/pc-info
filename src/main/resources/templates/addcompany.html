@@ -8,14 +8,20 @@
 <h1>Введите данные о новом предприятии</h1>
 <form method="post" th:action="@{/company/add}" th:object="${company}">
     <input type="text" th:field="*{id}" hidden/>
-    <input type="text" name="parentId" th:value="${companyParent.id}" hidden/>
-    <label name="shortname">Краткое название: </label>
-    <input type="text" name="shortname" th:field="*{shortName}"/><br/><br/>
+    <input type="text" name="parentId" th:value="${companyParent}" hidden/>
+    <label name="shortName">Краткое название: </label>
+    <input type="text" name="shortName" th:field="*{shortName}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('shortName')}"
+         th:errors="*{shortName}">Ошибка краткого названия</div>
+    <br/><br/>
     <label name="name">Название: </label>
-    <input type="text" name="name" th:field="*{name}"/><br/><br/>
-    <label name="digital-number">Цифровой номер: </label>
-    <input type="text" name="digital-number" th:field="*{digitalNumber}"/>
-    <div th:if="${#fields.hasErrors('digitalNumber')}"
+    <input type="text" name="name" th:field="*{name}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}"
+         th:errors="*{name}">Ошибка названия</div>
+    <br/><br/>
+    <label name="digitalNumber">Цифровой номер: </label>
+    <input type="text" name="digitalNumber" th:field="*{digitalNumber}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('digitalNumber')}"
           th:errors="*{digitalNumber}">Ошибка цифрового номера</div>
     <br/><br/>
     <label name="type">Тип предприятия: </label>
