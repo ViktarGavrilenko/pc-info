@@ -1,8 +1,8 @@
 package com.example.pcinfo.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 
 @Entity(name = "company")
 public class Company {
@@ -10,15 +10,15 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Название не должно быть пустым")
+    @NotEmpty(message = "{nameNotEmpty}")
     private String name;
 
     @Column(name = "digital_number")
-    @Digits(integer = 3, fraction = 0, message = "Введите корректный цифровой код")
+    @Positive(message = "{typeMismatch.company.digitalNumber}")
     private Integer digitalNumber;
 
     @Column(name = "short_name")
-    @NotEmpty(message = "Краткое название не должно быть пустым")
+    @NotEmpty(message = "{company.shortName}")
     private String shortName;
 
     @OneToOne
