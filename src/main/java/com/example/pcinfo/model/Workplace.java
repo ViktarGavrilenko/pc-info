@@ -2,6 +2,7 @@ package com.example.pcinfo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity(name = "workplace")
 public class Workplace {
@@ -19,7 +20,10 @@ public class Workplace {
 
     private Boolean networkConnection;
 
+    private List<Person> people;
 
+    public Workplace() {
+    }
 
     public String getName() {
         return name;
