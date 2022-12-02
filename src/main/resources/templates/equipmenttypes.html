@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipment types</title>
+</head>
+<body>
+<form method="post" th:action="@{/equip_type/delete}" th:object="${equipmentTypes}">
+    Тип оборудования:
+    <select name="id" >
+        <option th:each="equipmentType : ${equipmentTypes}"
+                th:text="${equipmentType.type}"
+                th:value="${equipmentType.id}">
+    </select><br/><br/>
+    <input type="submit" value="Удалить выбранный тип"/>
+</form><br/>
+<h4>В поле ниже добавьте новый тип оборудования</h4>
+<form method="post" th:action="@{/equip_type/add}" th:object="${equipmentType}">
+    <label name="type">Введите название типа: </label>
+    <input type="text" name="type" th:field="*{type}"/>
+    <div style="color:red" th:if="${#fields.hasErrors('type')}"
+         th:errors="*{type}">Ошибка типа</div><br/><br/>
+    <input type="submit" value="Добавить оборудование"/>
+</form>
+
+</body>
+</html>

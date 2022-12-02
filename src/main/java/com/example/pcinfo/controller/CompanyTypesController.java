@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/type")
+@RequestMapping("/company_type")
 public class CompanyTypesController {
     @Autowired
     CompanyTypesRepository companyTypesRepository;
@@ -23,12 +23,12 @@ public class CompanyTypesController {
     @PostMapping("/add")
     public String addCompany(@ModelAttribute CompanyTypes companyTypes) {
         companyTypesRepository.save(companyTypes);
-        return "redirect:/type";
+        return "redirect:/company_type";
     }
 
     @PostMapping("/delete")
     public String delCompany(@RequestParam(value = "id") Long id) {
         companyTypesRepository.deleteById(id);
-        return "redirect:/type";
+        return "redirect:/company_type";
     }
 }

@@ -1,23 +1,26 @@
 package com.example.pcinfo.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity(name="equipment_types")
 public class EquipmentTypes {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Введите тип устройства")
+    @Column(unique = true)
+    private String type;
 
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type;
 
     public EquipmentTypes() {
     }

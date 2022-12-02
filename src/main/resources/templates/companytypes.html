@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Company types</title>
 </head>
 <body>
-<form method="post" th:action="@{/type/delete}" th:object="${companyTypes}">
+<form method="post" th:action="@{/company_type/delete}" th:object="${companyTypes}">
     Тип предприятия:
     <select name="id" >
         <option th:each="companyType : ${companyTypes}"
@@ -15,7 +15,7 @@
     <input type="submit" value="Удалить выбранный тип"/>
 </form><br/>
 <h4>В поле ниже добавьте новый тип предприятия</h4>
-<form method="post" th:action="@{/type/add}" th:object="${companyTypes}">
+<form method="post" th:action="@{/company_type/add}" th:object="${companyTypes}">
     <label name="type">Введите название типа: </label>
     <input type="text" name="type"/><br/><br/>
     <input type="submit" value="Добавить компанию"/>

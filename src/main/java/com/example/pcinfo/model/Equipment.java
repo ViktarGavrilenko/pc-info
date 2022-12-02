@@ -6,16 +6,17 @@ import javax.validation.constraints.NotBlank;
 @Entity(name = "equipment")
 public class Equipment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
     private String name;
     @ManyToOne
     private EquipmentTypes type;
-    @Column(name="workplace_id")
+
     @ManyToOne
-    private Long workplaceId;
+    @JoinColumn(name="workplace_id")
+    private Workplace workplace;
+
     private String inventoryNumber;
     private String ADC;
 

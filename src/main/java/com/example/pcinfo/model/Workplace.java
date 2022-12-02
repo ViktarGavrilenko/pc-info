@@ -2,13 +2,12 @@ package com.example.pcinfo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "workplace")
 public class Workplace {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty(message = "{nameNotEmpty}")
@@ -20,7 +19,8 @@ public class Workplace {
 
     private Boolean networkConnection;
 
-    private List<Person> people;
+    @ManyToMany(mappedBy = "workplaces")
+    private Set<Person> people;
 
     public Workplace() {
     }

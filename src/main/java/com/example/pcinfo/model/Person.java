@@ -4,12 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity(name = "person")
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Введите имя")
@@ -21,6 +21,12 @@ public class Person {
     private LocalDate birthday;
     @NotNull(message = "Выберите пол")
     private Gender sex;
+
+    @ManyToMany
+    @JoinTable(name = "workplace_person",
+            joinColumns = @JoinColumn(name="person_id"),
+            inverseJoinColumns = @JoinColumn(name="workplace_id"))
+    private Set<Workplace> workplaces;
 
 
     public String getFirstName() {
