@@ -6,13 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "company_types")
-public class CompanyTypes {
+public class CompanyType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
 
-    public CompanyTypes() {
+    public CompanyType() {
     }
 
     public String getType() {

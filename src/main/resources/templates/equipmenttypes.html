@@ -19,7 +19,9 @@
     <label name="type">Введите название типа: </label>
     <input type="text" name="type" th:field="*{type}"/>
     <div style="color:red" th:if="${#fields.hasErrors('type')}"
-         th:errors="*{type}">Ошибка типа</div><br/><br/>
+         th:errors="*{type}">Ошибка типа</div>
+    <div style="color:red" th:if="${notUnique}"
+         th:text="${notUnique}">Ошибка типа</div><br/><br/>
     <input type="submit" value="Добавить оборудование"/>
 </form>
 

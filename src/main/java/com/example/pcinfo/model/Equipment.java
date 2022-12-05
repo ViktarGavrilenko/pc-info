@@ -11,7 +11,7 @@ public class Equipment {
     @NotBlank
     private String name;
     @ManyToOne
-    private EquipmentTypes type;
+    private EquipmentType type;
 
     @ManyToOne
     @JoinColumn(name="workplace_id")

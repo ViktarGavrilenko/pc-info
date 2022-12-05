@@ -23,7 +23,7 @@ public class Company {
 
     @OneToOne
     @JoinColumn(name = "company_types_id")
-    private CompanyTypes type;
+    private CompanyType type;
 
     @Column(name = "parent_id")
     private Long parentId;
@@ -47,11 +47,11 @@ public class Company {
         this.digitalNumber = digitalNumber;
     }
 
-    public CompanyTypes getType() {
+    public CompanyType getType() {
         return type;
     }
 
-    public void setType(CompanyTypes type) {
+    public void setType(CompanyType type) {
         this.type = type;
     }
 

@@ -1,9 +1,9 @@
 package com.example.pcinfo.repository;
 
-import com.example.pcinfo.model.CompanyTypes;
+import com.example.pcinfo.model.CompanyType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyTypesRepository extends CrudRepository<CompanyTypes, Long> {
+public interface CompanyTypeRepository extends CrudRepository<CompanyType, Long> {
 }

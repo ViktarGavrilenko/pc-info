@@ -1,9 +1,9 @@
 package com.example.pcinfo.controller;
 
 import com.example.pcinfo.model.Company;
-import com.example.pcinfo.model.CompanyTypes;
+import com.example.pcinfo.model.CompanyType;
 import com.example.pcinfo.repository.CompanyRepository;
-import com.example.pcinfo.repository.CompanyTypesRepository;
+import com.example.pcinfo.repository.CompanyTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,11 @@ public class CompanyController {
     @Autowired
     CompanyRepository companyRepository;
     @Autowired
-    CompanyTypesRepository companyTypesRepository;
+    CompanyTypeRepository companyTypeRepository;
 
     @GetMapping("/add")
     public String addCompany(@RequestParam(value = "parent", defaultValue = "0") Long id, Model model) {
-        Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
+        Iterable<CompanyType> companyTypes = companyTypeRepository.findAll();
         Optional<Company> company = companyRepository.findById(id);
         if (company.isEmpty()) {
             model.addAttribute("companyParent", null);
@@ -38,7 +38,7 @@ public class CompanyController {
     @PostMapping("/add")
     public String addCompany(@ModelAttribute("company") @Valid Company company, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
+            Iterable<CompanyType> companyTypes = companyTypeRepository.findAll();
             model.addAttribute("companyParent", company.getParentId());
             model.addAttribute("company", company);
             model.addAttribute("companyTypes", companyTypes);
@@ -92,7 +92,7 @@ public class CompanyController {
 
     @GetMapping("/update/{id}")
     public String updateCompany(@PathVariable Long id, Model model) {
-        Iterable<CompanyTypes> companyTypes = companyTypesRepository.findAll();
+        Iterable<CompanyType> companyTypes = companyTypeRepository.findAll();
         Optional<Company> company = companyRepository.findById(id);
         if (company.isEmpty()) {
             model.addAttribute("companies", companyRepository.findAllByParentIdIsNull());

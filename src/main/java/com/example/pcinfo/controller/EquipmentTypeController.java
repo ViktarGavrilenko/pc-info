@@ -1,8 +1,6 @@
 package com.example.pcinfo.controller;
 
-import com.example.pcinfo.model.Company;
-import com.example.pcinfo.model.Equipment;
-import com.example.pcinfo.model.EquipmentTypes;
+import com.example.pcinfo.model.EquipmentType;
 import com.example.pcinfo.repository.EquipmentTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,20 +18,24 @@ public class EquipmentTypeController {
 
     @GetMapping("/add")
     public String showIndex(Model model) {
-        Iterable<EquipmentTypes> equipmentTypes = equipmentTypeRepository.findAll();
+        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAll();
         model.addAttribute("equipmentTypes", equipmentTypes);
-        model.addAttribute("equipmentType", new EquipmentTypes());
+        model.addAttribute("equipmentType", new EquipmentType());
         return "equipmenttypes";
     }
 
     @PostMapping("/add")
-    public String addEquipment(@ModelAttribute("equipmentType") @Valid EquipmentTypes equipmentType, Errors errors, Model model) {
-        if (!errors.hasErrors()) {
+    public String addEquipment(@ModelAttribute("equipmentType") @Valid EquipmentType equipmentType, Errors errors, Model model) {
+        boolean isTypeExists = equipmentTypeRepository.existsByType(equipmentType.getType());
+        if (!errors.hasErrors() && !isTypeExists) {
             equipmentTypeRepository.save(equipmentType);
-            model.addAttribute("equipmentType", new EquipmentTypes());
+            model.addAttribute("equipmentType", new EquipmentType());
         }
-        Iterable<EquipmentTypes> equipmentTypes = equipmentTypeRepository.findAll();
+        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAll();
         model.addAttribute("equipmentTypes", equipmentTypes);
+        if (isTypeExists) {
+            model.addAttribute("notUnique", "Этот тип уже есть");
+        }
         return "equipmenttypes";
     }
 

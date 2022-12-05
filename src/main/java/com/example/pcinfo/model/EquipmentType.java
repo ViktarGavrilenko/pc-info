@@ -1,12 +1,10 @@
 package com.example.pcinfo.model;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Entity(name="equipment_types")
-public class EquipmentTypes {
+@Entity(name = "equipment_types")
+public class EquipmentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,11 +16,12 @@ public class EquipmentTypes {
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
 
-    public EquipmentTypes() {
+    public EquipmentType() {
     }
 
     public Long getId() {
