@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyTypeRepository extends CrudRepository<CompanyType, Long> {
+    boolean existsByType(String type);
 }

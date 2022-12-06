@@ -24,7 +24,7 @@
 <br/>
 <a th:href="@{/company/add?parent={id}(id=${company.id})}">Создать отдел</a>
 <br/><br/>
-<input type="button" onclick="history.back();" value="Вернуться назад"/>
+<a th:href="@{/company/{id}(id=${company.parentId})}">Вернуться назад</a>
 
 
 </body>

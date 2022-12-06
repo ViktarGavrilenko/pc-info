@@ -105,7 +105,13 @@ public class CompanyController {
     }
 
     @PostMapping("/update")
-    public String updateCompany(@ModelAttribute Company company, Model model) {
+    public String updateCompany(@ModelAttribute("company") @Valid Company company, Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            Iterable<CompanyType> companyTypes = companyTypeRepository.findAll();
+            model.addAttribute("company", company);
+            model.addAttribute("companyTypes", companyTypes);
+            return "updateCompany";
+        }
         companyRepository.save(company);
         Optional<Company> updateCompany = companyRepository.findById(company.getId());
         model.addAttribute("company", updateCompany.get());

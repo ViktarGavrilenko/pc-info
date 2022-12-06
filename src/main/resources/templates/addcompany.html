@@ -31,7 +31,7 @@
                 th:value="${companyType.id}">
     </select><br/><br/>
     <input type="submit" value="Добавить компанию"/>
-    <input type="button" onclick="history.back();" value="Вернуться назад"/>
+    <a th:href="@{/company/{id}(id=${companyParent})}">Вернуться назад</a>
 </form>
 </body>
 </html>

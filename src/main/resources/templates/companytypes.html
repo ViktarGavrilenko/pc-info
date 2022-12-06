@@ -5,7 +5,8 @@
     <title>Company types</title>
 </head>
 <body>
-<form method="post" th:action="@{/company_type/delete}" th:object="${companyTypes}">
+<form method="post" th:action="@{/company_type/delete}" onsubmit='return confirm("Вы действительно хотите удалить?")'
+      th:object="${companyTypes}">
     Тип предприятия:
     <select name="id" >
         <option th:each="companyType : ${companyTypes}"
@@ -15,11 +16,16 @@
     <input type="submit" value="Удалить выбранный тип"/>
 </form><br/>
 <h4>В поле ниже добавьте новый тип предприятия</h4>
-<form method="post" th:action="@{/company_type/add}" th:object="${companyTypes}">
+<form method="post" th:action="@{/company_type/add}" th:object="${companyType}">
     <label name="type">Введите название типа: </label>
-    <input type="text" name="type"/><br/><br/>
-    <input type="submit" value="Добавить компанию"/>
+    <input type="text" name="type"/>
+    <div style="color:red" th:if="${#fields.hasErrors('type')}"
+         th:errors="*{type}">Ошибка типа</div>
+    <div style="color:red" th:if="${notUnique}"
+         th:text="${notUnique}">Ошибка типа</div><br/><br/>
+    <input type="submit" value="Добавить тип"/>
 </form>
-
+<br/><br/>
+<a th:href="@{/admin}">Перейти в АДМИНКУ</a>
 </body>
 </html>
