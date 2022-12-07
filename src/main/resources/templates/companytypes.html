@@ -15,6 +15,13 @@
     </select><br/><br/>
     <input type="submit" value="Удалить выбранный тип"/>
 </form><br/>
+<div th:each="companyType : ${companyTypes}">
+    <a th:href="@{/company_type/update/{id}(id=${companyType.id})}">
+        <div th:text="${companyType.type}"></div>
+    </a>
+</div>
+<br/>
+<br/>
 <h4>В поле ниже добавьте новый тип предприятия</h4>
 <form method="post" th:action="@{/company_type/add}" th:object="${companyType}">
     <label name="type">Введите название типа: </label>

@@ -18,7 +18,7 @@ public class EquipmentTypeController {
 
     @GetMapping("/add")
     public String showIndex(Model model) {
-        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAll();
+        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAllByOrderByTypeAsc();
         model.addAttribute("equipmentTypes", equipmentTypes);
         model.addAttribute("equipmentType", new EquipmentType());
         return "equipmenttypes";
@@ -31,7 +31,7 @@ public class EquipmentTypeController {
             equipmentTypeRepository.save(equipmentType);
             model.addAttribute("equipmentType", new EquipmentType());
         }
-        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAll();
+        Iterable<EquipmentType> equipmentTypes = equipmentTypeRepository.findAllByOrderByTypeAsc();
         model.addAttribute("equipmentTypes", equipmentTypes);
         if (isTypeExists) {
             model.addAttribute("notUnique", "Этот тип уже есть");
