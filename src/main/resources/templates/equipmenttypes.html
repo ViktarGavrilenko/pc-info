@@ -5,7 +5,7 @@
     <title>Equipment types</title>
 </head>
 <body>
-<form method="post" th:action="@{/equip_type/delete}" onsubmit='return confirm("Вы действительно хотите удалить?")'
+<!--<form method="post" th:action="@{/equip_type/delete}" onsubmit='return confirm("Вы действительно хотите удалить?")'
       th:object="${equipmentTypes}">
     Тип оборудования:
     <select name="id" >
@@ -14,7 +14,14 @@
                 th:value="${equipmentType.id}">
     </select><br/><br/>
     <input type="submit" value="Удалить выбранный тип"/>
-</form><br/>
+</form><br/>-->
+
+<div th:each="equipmentType : ${equipmentTypes}">
+    <a th:href="@{/equip_type/update/{id}(id=${equipmentType.id})}">
+        <div th:text="${equipmentType.type}"></div>
+    </a>
+</div>
+
 <h4>В поле ниже добавьте новый тип оборудования</h4>
 <form method="post" th:action="@{/equip_type/add}" th:object="${equipmentType}">
     <label name="type">Введите название типа: </label>

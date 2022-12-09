@@ -61,7 +61,7 @@ public class CompanyTypeController {
     }
 
     @PostMapping("/update")
-    public String updateCompany(@ModelAttribute("companyType") @Valid CompanyType companyType, Errors errors) {
+    public String updateCompanyType(@ModelAttribute("companyType") @Valid CompanyType companyType, Errors errors) {
         if (errors.hasErrors()) {
             return "updateCompanyType";
         }
