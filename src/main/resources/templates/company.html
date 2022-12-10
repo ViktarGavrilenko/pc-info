@@ -5,17 +5,15 @@
     <title>Company info</title>
 </head>
 <body>
-<h6>
-    <span th:each="company, status : ${treeCompany}">
-        <a th:href="@{/company/{id}(id=${company.id})}">
-            <span th:text="${company.shortName}"></span>
-        </a>
-        <span th:unless="${status.last}"> ----> </span>
-    </span>
-</h6>
-
-
-<h3 th:text="${company.shortName}"></h3>
+<span>
+        <span th:each="company, status : ${treeCompany}">
+            <a th:href="@{/company/{id}(id=${company.id})}">
+                <span th:text="${company.shortName}"></span>
+            </a>
+            <span> ----> </span>
+        </span>
+    <span th:text="${company.shortName}"></span>
+</span>
 <div th:text="${company.name} + '. Тип: ' + ${company.type.getType()} + '. Цифровой код: ' + ${company.digitalNumber}"></div>
 <br/>
 <a th:href="@{/company/update/{id}(id=${company.id})}">Редактировать</a>

@@ -63,8 +63,9 @@ public class CompanyController {
             } else {
                 Optional<Company> parentCompany = companyRepository.findById(company.getParentId());
                 model.addAttribute(COMPANY, parentCompany.get());
-                Iterable<Company> childrenCompanies = companyRepository.findAllByParentId(parentCompany.get().getId());
+                Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(parentCompany.get().getId());
                 model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
+                model.addAttribute(TREE_COMPANY, getListParentCompanies(company));
                 return COMPANY;
             }
         }
@@ -80,7 +81,7 @@ public class CompanyController {
                 return REDIRECT_MAIN;
             } else {
                 model.addAttribute(COMPANY, company.get());
-                Iterable<Company> childrenCompanies = companyRepository.findAllByParentId(company.get().getId());
+                Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(company.get().getId());
                 model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
                 model.addAttribute(TREE_COMPANY, getListParentCompanies(company.get()));
                 return COMPANY;
@@ -98,7 +99,7 @@ public class CompanyController {
             Optional<Company> parentCompany = companyRepository.findById(company.get().getParentId());
             model.addAttribute(COMPANY, parentCompany.get());
             companyRepository.deleteById(id);
-            Iterable<Company> childrenCompanies = companyRepository.findAllByParentId(parentCompany.get().getId());
+            Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(parentCompany.get().getId());
             model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
             model.addAttribute(TREE_COMPANY, getListParentCompanies(company.get()));
             return COMPANY;
@@ -130,7 +131,7 @@ public class CompanyController {
         companyRepository.save(company);
         Optional<Company> updateCompany = companyRepository.findById(company.getId());
         model.addAttribute(COMPANY, updateCompany.get());
-        Iterable<Company> childrenCompanies = companyRepository.findAllByParentId(updateCompany.get().getId());
+        Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(updateCompany.get().getId());
         model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
         model.addAttribute(TREE_COMPANY, getListParentCompanies(company));
         return COMPANY;
@@ -150,5 +151,4 @@ public class CompanyController {
         Collections.reverse(treeCompany);
         return treeCompany;
     }
-
 }
