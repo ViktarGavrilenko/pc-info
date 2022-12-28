@@ -1,8 +1,11 @@
 package com.example.pcinfo.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Data
 @Entity(name = "equipment")
 public class Equipment {
     @Id
@@ -19,12 +22,4 @@ public class Equipment {
 
     private String inventoryNumber;
     private String ADC;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

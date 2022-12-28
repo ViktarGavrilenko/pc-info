@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompanyRepository extends CrudRepository<Company, Long> {
     Iterable<Company> findAllByParentIdIsNullOrderByShortNameAsc();
-
+    Iterable<Company> findAllByOrderByShortNameAsc();
     Iterable<Company> findAllByParentIdOrderByShortNameAsc(Long id);
 }

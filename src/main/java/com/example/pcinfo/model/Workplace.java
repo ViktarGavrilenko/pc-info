@@ -1,9 +1,12 @@
 package com.example.pcinfo.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
+@Data
 @Entity(name = "workplace")
 public class Workplace {
     @Id
@@ -21,39 +24,4 @@ public class Workplace {
 
     @ManyToMany(mappedBy = "workplaces")
     private Set<Person> people;
-
-    public Workplace() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getNetworkConnection() {
-        return networkConnection;
-    }
-
-    public void setNetworkConnection(Boolean networkConnection) {
-        this.networkConnection = networkConnection;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

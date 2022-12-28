@@ -5,16 +5,6 @@
     <title>Company types</title>
 </head>
 <body>
-<!--<form method="post" th:action="@{/company_type/delete}" onsubmit='return confirm("Вы действительно хотите удалить?")'
-      th:object="${companyTypes}">
-    Тип предприятия:
-    <select name="id" >
-        <option th:each="companyType : ${companyTypes}"
-                th:text="${companyType.type}"
-                th:value="${companyType.id}">
-    </select><br/><br/>
-    <input type="submit" value="Удалить выбранный тип"/>
-</form><br/>-->
 <div th:each="companyType : ${companyTypes}">
     <a th:href="@{/company_type/update/{id}(id=${companyType.id})}">
         <div th:text="${companyType.type}"></div>

@@ -1,9 +1,12 @@
 package com.example.pcinfo.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 
+@Data
 @Entity(name = "company")
 public class Company {
 
@@ -27,55 +30,4 @@ public class Company {
 
     @Column(name = "parent_id")
     private Long parentId;
-
-    public Company() {
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
-    public Integer getDigitalNumber() {
-        return digitalNumber;
-    }
-
-    public void setDigitalNumber(Integer digitalNumber) {
-        this.digitalNumber = digitalNumber;
-    }
-
-    public CompanyType getType() {
-        return type;
-    }
-
-    public void setType(CompanyType type) {
-        this.type = type;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

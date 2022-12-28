@@ -46,6 +46,24 @@ public class CompanyController {
         model.addAttribute(COMPANY, new Company());
         model.addAttribute(COMPANY_TYPES, companyTypes);
         return ADD_COMPANY;
+
+/*        Iterable<CompanyType> companyTypes = companyTypeRepository.findAllByOrderByTypeAsc();
+        if (id == 0) {
+            model.addAttribute(COMPANY_PARENT, 0);
+            if (companyRepository.findById(0L).isEmpty()){
+                addDefaultCompany();
+            }
+        } else {
+            Optional<Company> company = companyRepository.findById(id);
+            if (company.isEmpty()) {
+                return REDIRECT_MAIN;
+            } else {
+                model.addAttribute(COMPANY_PARENT, company.get().getId());
+            }
+        }
+        model.addAttribute(COMPANY, new Company());
+        model.addAttribute(COMPANY_TYPES, companyTypes);
+        return ADD_COMPANY;*/
     }
 
     @PostMapping("/add")
@@ -114,8 +132,14 @@ public class CompanyController {
             model.addAttribute(COMPANIES, companyRepository.findAllByParentIdIsNullOrderByShortNameAsc());
             return "index";
         } else {
+            if (company.get().getParentId() != null) {
+                Optional<Company> companyParent = companyRepository.findById(company.get().getParentId());
+                model.addAttribute(COMPANY_PARENT, companyParent);
+            }
             model.addAttribute(COMPANY, company.get());
             model.addAttribute(COMPANY_TYPES, companyTypes);
+            Iterable<Company> companies = companyRepository.findAllByOrderByShortNameAsc();
+            model.addAttribute(COMPANIES, companies);
             return UPDATE_COMPANY;
         }
     }

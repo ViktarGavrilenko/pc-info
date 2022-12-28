@@ -8,7 +8,12 @@
 <h1>Измените необходимые данные</h1>
 <form method="post" th:action="@{/company/update}" th:object="${company}">
     <input type="text" th:field="*{id}" hidden/>
-    <input type="text" th:field="*{parentId}" hidden/>
+    <label name="parentId">Родительское предприятие: </label>
+    <select name="parentId" th:field="*{parentId}">
+        <option th:each="company : ${companies}"
+                th:text="${company.shortName}"
+                th:value="${company.id}"></option>
+    </select><br/><br/>
     <label name="shortname">Краткое название: </label>
     <input type="text" name="shortname" th:field="*{shortName}"/>
     <div style="color:red" th:if="${#fields.hasErrors('shortName')}"
@@ -27,6 +32,7 @@
                 th:text="${companyType.type}"
                 th:value="${companyType.id}">
     </select><br/><br/>
+
     <input type="submit" value="Изменить данные"/>
     <br/><br/>
     <a th:href="@{/company/{id}(id=${company.id})}">Вернуться назад</a>

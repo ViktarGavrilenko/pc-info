@@ -1,8 +1,11 @@
 package com.example.pcinfo.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Data
 @Entity(name = "equipment_types")
 public class EquipmentType {
     @Id
@@ -12,23 +15,4 @@ public class EquipmentType {
     @NotBlank(message = "Введите тип устройства")
     @Column(unique = true)
     private String type;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public EquipmentType() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
