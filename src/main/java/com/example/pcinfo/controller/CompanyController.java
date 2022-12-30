@@ -46,24 +46,6 @@ public class CompanyController {
         model.addAttribute(COMPANY, new Company());
         model.addAttribute(COMPANY_TYPES, companyTypes);
         return ADD_COMPANY;
-
-/*        Iterable<CompanyType> companyTypes = companyTypeRepository.findAllByOrderByTypeAsc();
-        if (id == 0) {
-            model.addAttribute(COMPANY_PARENT, 0);
-            if (companyRepository.findById(0L).isEmpty()){
-                addDefaultCompany();
-            }
-        } else {
-            Optional<Company> company = companyRepository.findById(id);
-            if (company.isEmpty()) {
-                return REDIRECT_MAIN;
-            } else {
-                model.addAttribute(COMPANY_PARENT, company.get().getId());
-            }
-        }
-        model.addAttribute(COMPANY, new Company());
-        model.addAttribute(COMPANY_TYPES, companyTypes);
-        return ADD_COMPANY;*/
     }
 
     @PostMapping("/add")
@@ -83,8 +65,8 @@ public class CompanyController {
                 model.addAttribute(COMPANY, parentCompany.get());
                 Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(parentCompany.get().getId());
                 model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
-                model.addAttribute(TREE_COMPANY, getListParentCompanies(company));
-                return COMPANY;
+                model.addAttribute(TREE_COMPANY, getListParentCompanies(parentCompany.get()));
+                return REDIRECT_MAIN + COMPANY + "/" + parentCompany.get().getId();
             }
         }
     }
@@ -119,8 +101,8 @@ public class CompanyController {
             companyRepository.deleteById(id);
             Iterable<Company> childrenCompanies = companyRepository.findAllByParentIdOrderByShortNameAsc(parentCompany.get().getId());
             model.addAttribute(CHILDREN_COMPANIES, childrenCompanies);
-            model.addAttribute(TREE_COMPANY, getListParentCompanies(company.get()));
-            return COMPANY;
+            model.addAttribute(TREE_COMPANY, getListParentCompanies(parentCompany.get()));
+            return REDIRECT_MAIN + COMPANY + "/" + parentCompany.get().getId();
         }
     }
 

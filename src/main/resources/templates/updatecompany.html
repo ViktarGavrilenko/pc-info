@@ -10,6 +10,7 @@
     <input type="text" th:field="*{id}" hidden/>
     <label name="parentId">Родительское предприятие: </label>
     <select name="parentId" th:field="*{parentId}">
+        <option text="" value=""></option>
         <option th:each="company : ${companies}"
                 th:text="${company.shortName}"
                 th:value="${company.id}"></option>
@@ -30,7 +31,7 @@
     <select name="type" th:field="*{type}">
         <option th:each="companyType : ${companyTypes}"
                 th:text="${companyType.type}"
-                th:value="${companyType.id}">
+                th:value="${companyType.id}"></option>
     </select><br/><br/>
 
     <input type="submit" value="Изменить данные"/>

@@ -10,9 +10,9 @@
             <a th:href="@{/company/{id}(id=${company.id})}">
                 <span th:text="${company.shortName}"></span>
             </a>
-            <span> ----> </span>
+            <span th:if="${not status.last}"> ----> </span>
         </span>
-    <span th:text="${company.shortName}"></span>
+    <h2><span th:text="${company.shortName}"></span></h2>
 </span>
 <div th:text="${company.name} + '. Тип: ' + ${company.type.getType()} + '. Цифровой код: ' + ${company.digitalNumber}"></div>
 <br/>
@@ -23,7 +23,7 @@
     <input type="submit" value="Удалить"/>
 </form>
 <br/>
-<h2> Дочерние компании</h2>
+<h3> Структура</h3>
 <div th:each="childrenCompany : ${childrenCompanies}">
     <a th:href="@{/company/{id}(id=${childrenCompany.id})}">
         <div th:text="${childrenCompany.shortName}"></div>

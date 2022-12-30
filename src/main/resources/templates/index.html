@@ -8,7 +8,7 @@
 <h1>Предприятия</h1>
 <div class="companies" th:each="company: ${companies}">
     <a th:href="@{/company/{id}(id=${company.id})}">
-        <div th:text="${company.shortName} + ' (' + ${company.name} + ') ' + ${company.type.getType()}"></div>
+        <div th:text="${company.shortName} + ' (' + ${company.name} + ') '"></div>
     </a>
 </div>
 <br>
